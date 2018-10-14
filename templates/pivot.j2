@@ -1,0 +1,114 @@
+{% extends "base.j2" %}
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <h3>研究機関×研究種目で比較</h3>
+        <div class="alert alert-info">分科：{{ bunka }} </div>
+        <hr>
+        <h4>件数</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped">
+            <tr>
+                <th>機関名</th>
+                <th style="text-align: right">基盤S</th>
+                <th style="text-align: right">基盤A</th>
+                <th style="text-align: right">基盤B</th>
+                <th style="text-align: right">基盤C</th>
+                <th style="text-align: right">若手A</th>
+                <th style="text-align: right">若手B</th>
+                <th style="text-align: right">萌芽</th>
+                <th style="text-align: right">合計</th>
+            </tr>
+            {% for row in kensuu_pivot.itertuples() %}
+            <tr>
+                <td>{{ row.Index }}</td>
+                <td style="text-align: right">
+                    <a href="projectlist?bunka={{ bunka }}&institution={{ row.Index }}&category=基盤研究(S)">{{ row.kibanS
+                        }}</a>
+                </td>
+                <td style="text-align: right">
+                    <a href="projectlist?bunka={{ bunka }}&institution={{ row.Index }}&category=基盤研究(A)">{{ row.kibanA
+                        }}</a>
+                </td>
+                <td style="text-align: right">
+                    <a href="projectlist?bunka={{ bunka }}&institution={{ row.Index }}&category=基盤研究(B)">{{ row.kibanB
+                        }}</a>
+                </td>
+                <td style="text-align: right">
+                    <a href="projectlist?bunka={{ bunka }}&institution={{ row.Index }}&category=基盤研究(C)">{{ row.kibanC
+                        }}</a>
+                </td>
+                <td style="text-align: right">
+                    <a href="projectlist?bunka={{ bunka }}&institution={{ row.Index }}&category=若手研究(A)">{{ row.wakateA
+                        }}</a>
+                </td>
+                <td style="text-align: right">
+                    <a href="projectlist?bunka={{ bunka }}&institution={{ row.Index }}&category=若手研究(B)">{{ row.wakateB
+                        }}</a>
+                </td>
+                <td style="text-align: right">
+                    <a href="projectlist?bunka={{ bunka }}&institution={{ row.Index }}&category=挑戦的萌芽研究">{{ row.houga
+                        }}</a>
+                </td>
+                <th style="text-align: right">{{ row.all }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col">
+        <div id="kensuu_chart"></div>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script>
+            Highcharts.chart('kensuu_chart', {{ kensuu_json | safe }});
+        </script>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <hr>
+        <h4>金額</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped">
+            <tr>
+                <th>機関名</th>
+                <th style="text-align: right">基盤S</th>
+                <th style="text-align: right">基盤A</th>
+                <th style="text-align: right">基盤B</th>
+                <th style="text-align: right">基盤C</th>
+                <th style="text-align: right">若手A</th>
+                <th style="text-align: right">若手B</th>
+                <th style="text-align: right">萌芽</th>
+                <th style="text-align: right">合計</th>
+            </tr>
+            {% for row in kingaku_pivot.itertuples() %}
+            <tr>
+                <td>{{ row.Index }}</td>
+                <td style="text-align: right">{{ row.kibanS }}</td>
+                <td style="text-align: right">{{ row.kibanA }}</td>
+                <td style="text-align: right">{{ row.kibanB }}</td>
+                <td style="text-align: right">{{ row.kibanC }}</td>
+                <td style="text-align: right">{{ row.wakateA }}</td>
+                <td style="text-align: right">{{ row.wakateB }}</td>
+                <td style="text-align: right">{{ row.houga }}</td>
+                <th style="text-align: right">{{ row.all }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col">
+        <div id="kingaku_chart"></div>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script>
+            Highcharts.chart('kingaku_chart', {{ kingaku_json | safe }});
+        </script>
+    </div>
+</div>
+
+{% endblock %}

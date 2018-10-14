@@ -1,0 +1,45 @@
+{% extends "base.j2" %}
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <h3>研究課題リスト</h3>
+        <div class="alert alert-info">
+            <ul>
+                <li>研究機関： {{ institution }}</li>
+                <li>研究種目： {{ category }}</li>
+                <li>分科： {{ bunka }}</li>
+            </ul>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped">
+            <tr>
+                <th>採択年度</th>
+                <th>氏名</th>
+                <th>課題名</th>
+                <th style="text-align: right">件数</th>
+                <th style="text-align: right">金額</th>
+                <th style="text-align: right"></th>
+            </tr>
+            {% for row in df.itertuples() %}
+            <tr>
+                <td>{{ row.startfiscalyear }}</td>
+                <td>{{ row.fullname }}</td>
+                <td>{{ row.title_ja }}</td>
+                <td style="text-align: right">{{ row.kensuu }}</td>
+                <td style="text-align: right">{{ row.kingaku }}</td>
+                <td style="text-align: right">
+                    <a href="https://kaken.nii.ac.jp/search/?qb={{ row.awardnumber }}" target="_blank" class="btn btn-primary btn-sm"
+                        role="button">詳細</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
