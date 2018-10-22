@@ -6,6 +6,7 @@
 - https://www.ura.niigata-u.ac.jp/kaken3/ をPHPからPythonに移植したものです。 
 - PythonのウェブアプリケーションのフレームワークFlaskで作っています。
 - C4RAのKAKENテーブルが保存されているMariaDBがローカルで動いていることが前提です。
+- 自分の環境では https://github.com/c4ra/kaken_parse_grants_masterxml/blob/master/config.ipynb で作ったconfig.iniを、このフォルダと同じ高さの階層のsettingsというフォルダに置いています。config.iniの置き場所は、各自で修正をお願いします。
 
 ## 作業手順
 
