@@ -12,8 +12,8 @@
 
 - Anaconda promptを開始
 - Anacondaの仮想環境をひとつ適当な名前で作成する(たとえばkaken5とします)
+- 作った仮想環境(kaken5)をactivateする
 - requitements.txtに記載されたのパッケージを追加する
-- kaken5仮想環境をactivateする
 - python main.pyを実行
 - http://127.0.0.1:5000/ に適当なブラウザでアクセスする
 
